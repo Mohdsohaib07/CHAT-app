@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path'); 
 const {createServer}= require('http');
 const socketIo = require('socket.io');
 const session = require('express-session');
@@ -41,6 +42,7 @@ chatNamespace.on('connection',(socket)=>{
 dbconnect();
 //setting view engine to ejs
 app.set('view engine','ejs');
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
