@@ -1,0 +1,65 @@
+
+<%- include('./partials/header')%>
+
+<div id="signupstyle">
+    <header id="header"><h1>Group Chat</h1><a id="logOut"  href="/logout">logOut</a></header>
+<div class="subcontainer">
+    
+
+</div>
+<footer>
+    <form action="" id="footerform">
+    <!-- <input type="file" id="file" name="file">
+    <label for="file" id="filelogo">📂</label> -->
+    <input type="text" name="fullName" id="textbox"  placeholder="Type Here..." required>
+    <button id="thirdbtn" type="submit">▶</button>
+</form>
+</footer>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const username =  "<%=username%>";
+   const formEl = document.querySelector('#footerform');
+const inputEl = document.querySelector('#textbox');
+const msgContainer = document.querySelector('.subcontainer');
+const socket = io('/chat');
+
+socket.on('connect', () => {
+            console.log('Connected to server');
+        });
+        socket.emit('join', username);
+        socket.on('user joined',(data)=>{
+            let announcement = document.createElement('h4');
+            announcement.style.textAlign='center';
+            announcement.textContent=`${data} joined the chat`;
+            msgContainer.appendChild(announcement);
+        });
+formEl.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        if(inputEl.value){
+            socket.emit('chat message',inputEl.value);
+            let item = document.createElement('p');
+            item.classList.add('align-right');
+            item.textContent= inputEl.value ;
+            msgContainer.appendChild(item);
+            msgContainer.scrollTop = msgContainer.scrollHeight;
+            inputEl.value="";
+        }
+
+    });
+; 
+socket.on('send message',(data)=>{
+let item = document.createElement('p');
+item.classList.add('align-left');
+item.innerHTML= `<span style="color:red;font-size:0.7em">${data.username}</span <span>  :  </span <span style="color:inherit;">${data.message}</span`;
+msgContainer.appendChild(item);
+msgContainer.scrollTop = msgContainer.scrollHeight;
+});
+socket.on('left',(data)=>{
+    let announcement = document.createElement('h4');
+            announcement.style.textAlign='center';
+            announcement.textContent=`${data} left the chat`;
+            msgContainer.appendChild(announcement);
+})
+</script>
+<%- include('./partials/footer')%>

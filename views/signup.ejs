@@ -1,0 +1,13 @@
+<%- include('./partials/header')%>
+<div id="signupstyle">
+    <header id="header"><h1>Group Chat</h1></header>
+    <h2><span>Welcome</span>Buddy!</h2>
+<form action="/signup" method="post" id="inputform">
+    <input type="text" name="fullName" id="userName" autocomplete="off" placeholder="Enter Full Name" required>
+    <input type="text" name="email" id="email"  autocomplete="off" placeholder="Enter Email" required>
+    <input type="password" name="password" id="password" placeholder="Create password.. must be above 6 characters" required>
+    <button id="mainbtn" type="submit">Sign Up</button>
+</form>
+<a href="/login" id="secondarybtn">Log In</a>
+</div>
+<%- include('./partials/footer')%>

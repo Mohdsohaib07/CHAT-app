@@ -1,0 +1,36 @@
+<%- include('./partials/header')%>
+<div id="signupstyle">
+    <header id="header"><h1>Group Chat</h1></header>
+    <h1>Password Reset </h1>
+ <h2 id="change">Enter registered Email</h2>
+<div id="inputform">
+    <input type="text" id="rightemail" placeholder="Enter Email... feature Not functional" name="email">
+    <button id="mainbtn">Submit</button>
+</div><br>
+<a href="/login" id="secondarybtn">Go to login</a>
+</div>
+<script>
+    const changeEl = document.getElementById('change');
+    const button = document.getElementById('mainbtn');
+    const val = document.getElementById('rightemail');
+    const formEle = document.getElementById('inputform');
+    
+  button.addEventListener('click',    async function send() {
+        if(val.vlaue==''){return changeEl.textContent='Please enter a vaild email';}
+        const formdata = {
+            email:val.value
+        }
+      try{
+        let res = await fetch('http://localhost:3000/forgot',{method:"POST",body:JSON.stringify(formdata),
+        headers:{'content-type':'application/json'}});
+        let data =  await res.json();
+        console.log(data);
+        changeEl.textContent=data.result;
+        val.value='';
+         }
+      catch(err){
+        console.log(err);
+      }
+    });
+</script>
+<%- include('./partials/footer')%>

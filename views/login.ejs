@@ -1,0 +1,16 @@
+<%- include('./partials/header')%>
+
+<div id="signupstyle">
+    <header id="header"><h1>Group Chat</h1></header>
+    <h2><span>Welcome</span>Buddy!</h2>
+<form action="/login" method="post" id="inputform">
+    <input type="text" name="email" id="email"  autocomplete="off" placeholder="Enter Email" required>
+    <input type="password" name="password" id="password" placeholder="Enter password" required>
+    <a href="/forgot" style="color: rgb(255, 255, 255);">forgot Password?</a>
+    <button id="mainbtn">Log In</button>
+</form>
+<a href="/" id="secondarybtn">Sign Up</a>
+</div>
+
+
+<%- include('./partials/footer')%>
