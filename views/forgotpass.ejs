@@ -21,7 +21,7 @@
             email:val.value
         }
       try{
-        let res = await fetch('http://localhost:3000/forgot',{method:"POST",body:JSON.stringify(formdata),
+        let res = await fetch('/forgot',{method:"POST",body:JSON.stringify(formdata),
         headers:{'content-type':'application/json'}});
         let data =  await res.json();
         console.log(data);
